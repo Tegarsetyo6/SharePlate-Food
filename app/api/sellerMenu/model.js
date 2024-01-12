@@ -25,6 +25,10 @@ const sellerMenuSchema = Schema({
     type: Number,
     required: true,
   },
+  amount: {
+    type: Number,
+    required: true,
+  },
 });
 
 module.exports = model('SellerMenu', sellerMenuSchema);

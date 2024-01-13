@@ -1,17 +1,17 @@
-const SellerMenu = require('../../api/sellerMenu/model');
+const donationMenu = require('../../api/donationMenu/model');
 
 const { BadRequestError, NotFoundError } = require('../../errors/index');
 
-const getAllSellerMenu = async (req) => {
-  const result = await SellerMenu.find();
+const getAllDonationMenu = async (req) => {
+  const result = await donationMenu.find();
 
   return result;
 };
 
 const createMenu = async (req) => {
-  const { name, description, category, price, sellerId, amount, longitude, latitude } = req.body;
+  const { name, description, category, sellerId, amount } = req.body;
 
-  const check = await SellerMenu.findOne({
+  const check = await donationMenu.findOne({
     name,
     sellerId: sellerId,
   });
@@ -20,15 +20,12 @@ const createMenu = async (req) => {
     throw new BadRequestError('Nama tidak boleh duplikat');
   }
 
-  const result = await SellerMenu.create({
+  const result = await donationMenu.create({
     name,
     description,
     category,
-    price,
     sellerId,
     amount,
-    longitude,
-    latitude,
   });
 
   return result;
@@ -37,20 +34,20 @@ const createMenu = async (req) => {
 const deleteMenu = async (req) => {
   const { id } = req.params;
 
-  const result = await SellerMenu.findOne({
+  const result = await donationMenu.findOne({
     _id: id,
   });
 
   if (!result) throw new NotFoundError(`Tidak ada Menu dengan id :  ${id}`);
 
-  return SellerMenu.deleteOne({ _id: id });
+  return donationMenu.deleteOne({ _id: id });
 };
 
 const updateMenu = async (req) => {
   const { id } = req.params;
-  const { name, description, category, price, sellerId, amount } = req.body;
+  const { name, description, category, sellerId, amount } = req.body;
 
-  const check = await SellerMenu.findOne({
+  const check = await donationMenu.findOne({
     name,
     _id: id,
     sellerId: sellerId,
@@ -58,11 +55,11 @@ const updateMenu = async (req) => {
 
   if (check) throw new BadRequestError('Kategori nama duplikasi');
 
-  const result = await SellerMenu.findOneAndUpdate(
+  const result = await donationMenu.findOneAndUpdate(
     {
       _id: id,
     },
-    { name, description, category, price, sellerId, amount },
+    { name, description, category, sellerId, amount },
     { new: true, runValidators: true }
   );
 
@@ -83,7 +80,7 @@ const checkingMenu = async (req) => {
 };
 
 module.exports = {
-  getAllSellerMenu,
+  getAllDonationMenu,
   createMenu,
   deleteMenu,
   updateMenu,

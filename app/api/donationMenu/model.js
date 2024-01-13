@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { model, Schema } = mongoose;
 
-const sellerMenuSchema = Schema({
+const donationMenuSchema = Schema({
   name: {
     type: String,
     minlength: [3, 'Panjang nama menu minimal 3 karakter'],
@@ -16,10 +16,6 @@ const sellerMenuSchema = Schema({
   },
   category: {
     type: String,
-  },
-  price: {
-    type: Number,
-    required: [true, 'Harga menu harus diisi'],
   },
   sellerId: {
     type: Number,
@@ -41,4 +37,4 @@ const sellerMenuSchema = Schema({
   },
 });
 
-module.exports = model('SellerMenu', sellerMenuSchema);
+module.exports = model('DonationMenu', donationMenuSchema);

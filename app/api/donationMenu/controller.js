@@ -1,10 +1,10 @@
 const { StatusCodes } = require('http-status-codes');
 
-const { getAllSellerMenu, createMenu, deleteMenu, updateMenu, checkingMenu } = require('../../services/mongoose/sellerMenu');
+const { getAllDonationMenu, createMenu, deleteMenu, updateMenu, checkingMenu } = require('../../services/mongoose/donationMenu');
 
 const index = async (req, res, next) => {
   try {
-    const result = await getAllSellerMenu();
+    const result = await getAllDonationMenu();
 
     res.status(StatusCodes.OK).json({
       data: result,

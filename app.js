@@ -9,6 +9,7 @@ var app = express();
 
 // router
 const sellerMenuRouter = require('./app/api/sellerMenu/router');
+const donationMenuRouter = require('./app/api/donationMenu/router');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -27,5 +28,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', sellerMenuRouter);
+app.use('/api', donationMenuRouter);
 
 module.exports = app;
